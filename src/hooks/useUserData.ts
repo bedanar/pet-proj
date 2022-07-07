@@ -1,6 +1,9 @@
+import { meRequest, meRequestSuccess, meRequestError, meRequestAsync } from './../store/me/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import { tokenContext } from './../shared/context/tokenContext';
 import { useState, useEffect, useContext } from "react";
 import axios from 'axios'
+import { RootState } from '../store/store';
 
 interface IUserData{
     username?: string,
@@ -8,17 +11,15 @@ interface IUserData{
 }
 
 export function useUserData() {
-    const [data, setData] = useState<IUserData>({})
-    const token = useContext(tokenContext)
+    const data = useSelector<RootState, IUserData>(state => state.me.data)
+    const loading = useSelector<RootState, boolean>(state => state.me.loading)
+    const token = useSelector<RootState>(state => state.token)
+    const dispatch = useDispatch()
     useEffect(() => {
-        axios.get('https://oauth.reddit.com/api/v1/me', {
-        headers: {Authorization: `bearer ${token}`}
-        })
-        .then((resp) => {
-            const userData = resp.data
-            setData({username: userData.name, avatarImage: userData.icon_img})
-        })
-        .catch(console.log)
+        if (!token) return;
+        dispatch(meRequestAsync())
     }, [token])
-    return [data]
+    return {
+        data, loading
+    }
 }

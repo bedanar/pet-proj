@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom'
-import { CommentForm } from '../CommentForm';
+import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 
 interface IPostProps {
@@ -39,7 +39,7 @@ export function Post({onClose} : IPostProps) {
             как квинтэссенцию победы маркетинга над разумом и должны быть ассоциативно распределены по отраслям. 
           </p>
         </div>
-        <CommentForm />
+        <CommentFormContainer />
     </div>),
     node
   );
