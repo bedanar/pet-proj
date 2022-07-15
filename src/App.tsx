@@ -14,6 +14,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { rootReducer, RootState } from "./store/store";
 import thunk, {ThunkAction} from "redux-thunk";
 import { setToken } from "./store/store";
+import {commentContext} from './shared/context/commentContext'
+
 const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(thunk)
 ))
@@ -25,7 +27,9 @@ export const timeout = (): ThunkAction<void, RootState, unknown, Action<string>>
 }
 
 function AppComponent () {
-    // const [token] = useToken()
+    const [token] = useToken()
+    const [commentValue, setCommentValue] = useState('')
+    const CommentProvider = commentContext.Provider 
     // const dispatch = useDispatch()
     // useEffect(() => {  
     //     const token = localStorage.getItem('token') || window.__token__
@@ -39,12 +43,12 @@ function AppComponent () {
 
 
     return (
-        // <tokenContext.Provider value={token}>
-        //     <UserContextProvider>
-                // <CommentProvider value={{
-                //     value: commentValue,
-                //     onChange: setCommentValue
-                // }}>
+        <tokenContext.Provider value={token}>
+            <UserContextProvider>
+                <CommentProvider value={{
+                    value: commentValue,
+                    onChange: setCommentValue
+                }}>
                     <Provider store = {store}>
                         <Layout>
                             <Header/>
@@ -53,9 +57,9 @@ function AppComponent () {
                             </Content>
                         </Layout>
                     </Provider>
-                // </CommentProvider>
-        //     </UserContextProvider>
-        // </tokenContext.Provider>
+                 </CommentProvider>
+             </UserContextProvider>
+         </tokenContext.Provider>
     )
 }
 
