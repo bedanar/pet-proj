@@ -14,7 +14,7 @@ export function CommentFormContainer() {
     event.preventDefault()
     console.log(value)
   }
-  return (
-    <CommentForm value={value} onChange={handleChange} onSubmit={handleSubmit} />
-  );
+  // return (
+  //   <CommentForm value={value} onChange={handleChange} onSubmit={handleSubmit} />
+  // );
 }

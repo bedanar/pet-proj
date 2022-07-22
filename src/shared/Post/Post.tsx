@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom'
 import { CommentForm } from '../CommentForm';
-import { CommentFormContainer } from '../CommentFormContainer';
+// import { CommentFormContainer } from '../CommentFormContainer';
 import styles from './post.css';
 
 interface IPostProps {

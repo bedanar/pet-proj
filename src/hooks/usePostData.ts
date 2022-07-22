@@ -6,7 +6,7 @@ export function usePostData() {
     const [data, setData] = useState([])
     const token = useContext(tokenContext)
     useEffect(() => {
-        axios.get('https://www.reddit.com/dev/api/#GET_best', {
+        axios.get('', {
         headers: {Authorization: `bearer ${token}`}
         })
         .then((resp) => {
